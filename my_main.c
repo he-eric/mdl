@@ -70,6 +70,14 @@ void my_main( int polygons ) {
 
   for (i=0;i<lastop;i++) {  
     switch (op[i].opcode) {
+    	case PUSH: 
+    		printf( "Pushed\n");
+    		push(s);
+    		break;
+    	case POP:
+    		printf( "Popped\n" );
+    		pop(s);
+    		break;
       case MOVE:
         printf("Moved: %6.2f %6.2f %6.2f\n",
 		    op[i].op.move.d[0],op[i].op.move.d[1],
@@ -98,9 +106,12 @@ void my_main( int polygons ) {
 	      printf("Rotated: axis: %6.2f degrees: %6.2f\n",
 		    op[i].op.rotate.axis,
 		    op[i].op.rotate.degrees);
+		    double angle;
 		    //x rotation
 		    if ( op[i].op.rotate.axis == 0 ) {
-		      tmp = make_rotX( op[i].op.rotate.degrees * (M_PI/180));
+		    	angle = op[i].op.rotate.degrees * (M_PI/180);
+		      tmp = make_rotX( angle );
+		      printf( "%6.2f\n", angle );
 		      matrix_mult( s->data[s->top], tmp );
 		      copy_matrix( tmp, s->data[s->top] );
 		      tmp->lastcol = 0;
