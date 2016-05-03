@@ -80,7 +80,8 @@ void my_main( int polygons ) {
     		break;
       case MOVE:
         printf("Moved: %6.2f %6.2f %6.2f\n",
-		    op[i].op.move.d[0],op[i].op.move.d[1],
+		    op[i].op.move.d[0],
+		    op[i].op.move.d[1],
 		    op[i].op.move.d[2]);
 		    tmp = make_translate( 
 		        op[i].op.move.d[0],
@@ -88,7 +89,7 @@ void my_main( int polygons ) {
 		        op[i].op.move.d[2]);
 		    matrix_mult( s->data[s->top], tmp );
 		    copy_matrix( tmp, s->data[s->top] );
-		    tmp->lastcol = 0;
+		    //tmp->lastcol = 0;
 		    break;
 		  case SCALE:
 	      printf("Scaled: %6.2f %6.2f %6.2f\n",
@@ -100,21 +101,18 @@ void my_main( int polygons ) {
 		      op[i].op.scale.d[2]);
 		    matrix_mult( s->data[s->top], tmp );
 		    copy_matrix( tmp, s->data[s->top] );
-		    tmp->lastcol = 0;
+		    //tmp->lastcol = 0;
 		    break;
 		  case ROTATE:
 	      printf("Rotated: axis: %6.2f degrees: %6.2f\n",
 		    op[i].op.rotate.axis,
 		    op[i].op.rotate.degrees);
-		    double angle;
 		    //x rotation
-		    if ( op[i].op.rotate.axis == 0 ) {
-		    	angle = op[i].op.rotate.degrees * (M_PI/180);
-		      tmp = make_rotX( angle );
-		      printf( "%6.2f\n", angle );
+		    if ( op[i].op.rotate.axis == 0) {
+		      tmp = make_rotX( op[i].op.rotate.degrees * (M_PI/180));
 		      matrix_mult( s->data[s->top], tmp );
 		      copy_matrix( tmp, s->data[s->top] );
-		      tmp->lastcol = 0;
+		      //tmp->lastcol = 0;
 		      break;
 		    }
 		    //y rotation
@@ -122,7 +120,7 @@ void my_main( int polygons ) {
 		      tmp = make_rotY( op[i].op.rotate.degrees * (M_PI/180));
 		      matrix_mult( s->data[s->top], tmp );
 		      copy_matrix( tmp, s->data[s->top] );
-		      tmp->lastcol = 0;
+		      //tmp->lastcol = 0;
 		      break;
         }
         //z rotation
@@ -130,7 +128,7 @@ void my_main( int polygons ) {
 		      tmp = make_rotZ( op[i].op.rotate.degrees * (M_PI/180));
 		      matrix_mult( s->data[s->top], tmp );
 		      copy_matrix( tmp, s->data[s->top] );
-		      tmp->lastcol = 0;
+		      //tmp->lastcol = 0;
 		      break;
         }
       case BOX:
@@ -148,7 +146,7 @@ void my_main( int polygons ) {
 		      op[i].op.box.d1[2]);
 		    matrix_mult( s->data[s->top], tmp );
 		    draw_polygons( tmp, t, g );
-		    tmp->lastcol = 0;
+		    //tmp->lastcol = 0;
 		    break;
 		  case SPHERE:
 	      printf("Sphere: %6.2f %6.2f %6.2f r=%6.2f\n",
@@ -163,7 +161,7 @@ void my_main( int polygons ) {
 		    	10);
 		    matrix_mult( s->data[s->top], tmp );
 		    draw_polygons( tmp, t, g );
-		    tmp->lastcol = 0;
+		    //tmp->lastcol = 0;
 		    break;
 		  case TORUS:
 	  		printf("Torus: %6.2f %6.2f %6.2f r0=%6.2f r1=%6.2f\n",
@@ -179,7 +177,7 @@ void my_main( int polygons ) {
 		 			10);
 		 		matrix_mult( s->data[s->top], tmp );
 		 		draw_polygons( tmp, t, g );
-		 		tmp->lastcol = 0;
+		 		//tmp->lastcol = 0;
 				break;
 		 	case LINE:
 	  		printf("Line: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f\n",
