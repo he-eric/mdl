@@ -60,6 +60,9 @@ void my_main( int polygons ) {
   struct stack *s;
   screen t;
   color g;
+  g.red = 0;
+  g.green = 255;
+  g.blue = 0;
   
   s = new_stack();
   tmp = new_matrix(4, 1000);
